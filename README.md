@@ -12,13 +12,12 @@
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
-
-{Describe the programming language that you used and any libraries.}
+* Visual Studio Code
+* GitHub
+* Java
+* Java File, ArrayList, Iterator, and Scanner
 
 # Useful Websites
-
-{Make a list of websites that you found helpful in this project}
 
 - [Java Tutorial-W3Schools](https://www.w3schools.com/java/default.asp)
 - [Java Collection Frameworks-BeginnersBook](https://beginnersbook.com/java-collections-tutorials/)
