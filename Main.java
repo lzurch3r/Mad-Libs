@@ -18,12 +18,62 @@ public class Main {
     //Call getStory to add the selected story
     story = getStory(storyNum, story);
     //System.out.println("gotten story");
+    System.out.println("");
+    String display = parseStory(story);
 
-    for (int i = 0; i < story.size(); i++) {
+    /*for (int i = 0; i < story.size(); i++) {
       total += story.get(i);
-    }
+    }*/
 
-    System.out.println(total);
+    //Display the Mad Lib with all the changes
+    System.out.println(display);
+  }
+
+  static String parseStory(ArrayList<String> list) {
+    ArrayList<String> lines = new ArrayList<String>(list);
+    String text = "\n\n";
+    //Advanced for loop to read a line from the list and parse out the user input lines
+    for (String line : lines) {
+      //Standard for loop to iterate through each character in the text
+      for (int i = 0; i < line.length(); i++) {
+        //System.out.println(line.charAt(i));
+
+        
+      //stops reading when the iterator encounters an open square bracket [
+        if (line.charAt(i) == '[') {
+          //System.out.println("Reached a '['");
+          boolean ending = false;
+          String prompt = "";
+          int n = i + 1;
+          
+          //writes the adjoining word into a separate String until iterator encounters a closed square bracket ]
+          while (!ending) {
+            if (line.charAt(n) == ']') {
+              //System.out.println("Reached a ']'");
+              ending = true;
+            }
+            else {
+              prompt += line.charAt(n);
+              n++;
+            }
+
+          }
+          
+          //calls getUserInput and passes the prompt word in
+          text += getUserInput(prompt);
+          i = n;
+        }
+        else {
+          //Adds each non-prompt character to the String text
+          text += line.charAt(i);
+        }
+
+      }
+      text += "\n";
+    }
+    //System.out.println(lines.get(0));
+
+    return text;
   }
 
   static ArrayList<String> getStory(int storyNum, ArrayList<String> list) {
@@ -58,24 +108,40 @@ public class Main {
   }
 
   static String getUserInput(String wordType) {
+    String word = "";
+    boolean validation = false;
     //Prompts the user for a number
     System.out.print(wordType + ": ");
 
     //Gets user input and assign it to word
-    Scanner input = new Scanner(System.in);
-    String word = "";
-    word += input.nextLine();
+    while (!validation) {
+      try {
+        Scanner input = new Scanner(System.in);
+        word += input.nextLine();
+        validation = true;
+      } catch (Exception e) {
+        System.out.print("Can't accept that. Please enter a/an " + wordType);
+      }
+    }
 
     //Return user word
     return word;
   }
   static int getUserInput(String prompt, int num) {
+    boolean validation = false;
     //Prompts the user for a number
     System.out.print(prompt);
 
     //Gets user input and assign it to num
-    Scanner input = new Scanner(System.in);
-    num = input.nextInt();
+    while (!validation) {
+      try {
+        Scanner input = new Scanner(System.in);
+        num = input.nextInt();
+        validation = true;
+      } catch (Exception e) {
+        System.out.print(prompt);
+      }
+    }
 
     //Return user number
     return num;
@@ -94,10 +160,10 @@ public class Main {
         if (num >= min && num <= max)
           validation = true;
         else {
-          System.out.print("Invalid input. Must be a number between " + min + " and " + max + ": ");
+          System.out.print("Can't accept that. Must be a number between " + min + " and " + max + ": ");
         }
       } catch (Exception e) {
-        System.out.print("Invalid input. Must be a number between " + min + " and " + max + ": ");
+        System.out.print("Can't accept that. Must be a number between " + min + " and " + max + ": ");
         //e.printStackTrace();
 
       }
