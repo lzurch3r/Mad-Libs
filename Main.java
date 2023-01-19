@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 
 public class Main {
   public static void main(String[] args) {
+    //Clear the console
+    System.out.print("\033[2J\033[1;1H");
+
     //Prompt user for a story
     int storyNum = getUserInput("Select a story (1, 2, or 3): ", 1, 3);
     
