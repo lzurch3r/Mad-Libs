@@ -81,26 +81,33 @@ public class Main {
     return num;
   }
   static int getUserInput(String prompt, int min, int max) {
-    int num = 0;
+    int num = -1;
+    boolean validation = false;
     //Prompts the user for a number
     System.out.print(prompt);
 
     //Gets user input and assign it to num
-    while (num != 0) {
+    while (!validation) {
       try {
         Scanner input = new Scanner(System.in);
         num = input.nextInt();
+        if (num >= min && num <= max)
+          validation = true;
+        else {
+          System.out.print("Invalid input. Must be a number between " + min + " and " + max + ": ");
+        }
       } catch (Exception e) {
-        System.out.println("Invalid input. Must be a number between " + min + " and " + max + ".");
+        System.out.print("Invalid input. Must be a number between " + min + " and " + max + ": ");
         //e.printStackTrace();
+
       }
     }
 
-    while (num < min || num > max) {
+    /*while (num < min || num > max) {
       System.out.print("Please enter a number between " + min + " and " + max + ": ");
       Scanner newInput = new Scanner(System.in);
       num = newInput.nextInt();
-    }
+    }*/
 
     //Return user number
     return num;
