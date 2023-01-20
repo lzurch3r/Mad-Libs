@@ -22,6 +22,10 @@
 - [Java Tutorial-W3Schools](https://www.w3schools.com/java/default.asp)
 - [Java Collection Frameworks-BeginnersBook](https://beginnersbook.com/java-collections-tutorials/)
 - [Java User Input-W3Schools](https://www.w3schools.com/java/java_user_input.asp)
+- [How to clear console in Java](https://stackoverflow.com/questions/70821664/how-to-clear-console-in-java-on-windows)
+- [Take a char from a Scanner](https://stackoverflow.com/questions/13942701/take-a-char-input-from-the-scanner)
+- [Free Mad Libs](https://www.madlibs.com/)
+- [More Printable Mad Libs](https://findafreeprintable.com/free-printable-mad-libs/)
 
 # Future Work
 

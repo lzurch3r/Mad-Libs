@@ -1,8 +1,9 @@
 import java.util.ArrayList;
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+//import java.io.IOException;
 
 public class Main {
   public static void main(String[] args) {
@@ -12,9 +13,6 @@ public class Main {
     //Prompt user for a story
     int storyNum = getUserInput("Select a story (1, 2, or 3): ", 1, 3);
     
-
-    //Create an empty String to use as display
-    String total = "";
     //Create an ArrayList to hold the Mad Lib text
     ArrayList<String> story = new ArrayList<String>();
     //System.out.println("Getting story...");
@@ -22,19 +20,39 @@ public class Main {
     story = getStory(storyNum, story);
     //System.out.println("gotten story");
     System.out.println("");
-    String display = parseStory(story);
-
-    /*for (int i = 0; i < story.size(); i++) {
-      total += story.get(i);
-    }*/
+    String total = parseStory(story);
 
     //Display the Mad Lib with all the changes
-    System.out.println(display);
+    display("\n\n" + total);
+
+    //Ask user to save
+    boolean willSave = getUserInput("Save this Mad Lib? (Y/n) ", true);
+    if (willSave) {
+      FileHandler fHandler = new FileHandler();
+      String url = "SavedStories/";
+
+      String filename = getUserInput("Filename");
+      boolean validation = fHandler.writeNewFile(url + filename + ".txt");
+      if (!validation) {
+        willSave = getUserInput("Overwrite? (Y/n)", true);
+        if (willSave) {
+          fHandler.writeToFile(url + filename + ".txt", total);
+        }
+      } else {
+        fHandler.writeToFile(url + filename + ".txt", total);
+      }
+    } else {
+      System.out.println("Mad Lib not saved.");
+    }
+  }
+
+  static void display(String text) {
+    System.out.println(text);
   }
 
   static String parseStory(ArrayList<String> list) {
     ArrayList<String> lines = new ArrayList<String>(list);
-    String text = "\n\n";
+    String text = "";
     //Advanced for loop to read a line from the list and parse out the user input lines
     for (String line : lines) {
       //Standard for loop to iterate through each character in the text
@@ -70,7 +88,6 @@ public class Main {
           //Adds each non-prompt character to the String text
           text += line.charAt(i);
         }
-
       }
       text += "\n";
     }
@@ -84,6 +101,14 @@ public class Main {
     switch (storyNum) {
       case 1: {
         list = readFile("Stories/VacationFun.txt");
+      }
+      break;
+      case 2: {
+        list = readFile("Stories/IfYouGiveA.txt");
+      }
+      break;
+      case 3: {
+        list = readFile("Stories/TheSnowballFight.txt");
       }
       break;
       default: {
@@ -129,6 +154,36 @@ public class Main {
 
     //Return user word
     return word;
+  }
+  static boolean getUserInput(String prompt, boolean isBool) {
+    char letter = ' ';
+    boolean willSave = false;
+    boolean validation = false;
+    //Prompts the user for a number
+    System.out.print(prompt);
+
+    //Gets user input and assign it to word
+    while (!validation) {
+      try {
+        Scanner input = new Scanner(System.in);
+        letter = input.next(".").charAt(0);
+       //System.out.println(letter);
+        if (letter == 'Y' || letter == 'y' || letter == 'N' || letter == 'n') {
+          //System.out.println("Validating...");
+          validation = true;
+        } else {
+          System.out.print("Please enter Y/n: ");
+        }
+      } catch (Exception e) {
+        System.out.print("Please enter Y/n: ");
+      }
+
+      if (letter == 'Y' || letter == 'y')
+        willSave = true;
+    }
+
+    //Return user word
+    return willSave;
   }
   static int getUserInput(String prompt, int num) {
     boolean validation = false;
@@ -180,5 +235,15 @@ public class Main {
 
     //Return user number
     return num;
+  }
+  /*** Stretch Challenge: Read and Write Files ***/
+  static void writeNewFile(String filename) {
+
+  }
+  static void writeToFile(String filename) {
+
+  }
+  static void deleteFile(String filename) {
+
   }
 }
