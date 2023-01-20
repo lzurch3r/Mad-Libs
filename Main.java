@@ -10,8 +10,11 @@ public class Main {
     //Clear the console
     System.out.print("\033[2J\033[1;1H");
 
+    //Create a UserInput object
+    UserInput ui = new UserInput();
+
     //Prompt user for a story
-    int storyNum = getUserInput("Select a story (1, 2, or 3): ", 1, 3);
+    int storyNum = ui.getUserInput("Select a story (1, 2, or 3): ", 1, 3);
     
     //Create an ArrayList to hold the Mad Lib text
     ArrayList<String> story = new ArrayList<String>();
@@ -20,21 +23,21 @@ public class Main {
     story = getStory(storyNum, story);
     //System.out.println("gotten story");
     System.out.println("");
-    String total = parseStory(story);
+    String total = parseStory(story, ui);
 
     //Display the Mad Lib with all the changes
     display("\n\n" + total);
 
     //Ask user to save
-    boolean willSave = getUserInput("Save this Mad Lib? (Y/n) ", true);
+    boolean willSave = ui.getUserInput("Save this Mad Lib? (Y/n) ", true);
     if (willSave) {
       FileHandler fHandler = new FileHandler();
       String url = "SavedStories/";
 
-      String filename = getUserInput("Filename");
+      String filename = ui.getUserInput("Filename");
       boolean validation = fHandler.writeNewFile(url + filename + ".txt");
       if (!validation) {
-        willSave = getUserInput("Overwrite? (Y/n)", true);
+        willSave = ui.getUserInput("Overwrite? (Y/n)", true);
         if (willSave) {
           fHandler.writeToFile(url + filename + ".txt", total);
         }
@@ -50,7 +53,7 @@ public class Main {
     System.out.println(text);
   }
 
-  static String parseStory(ArrayList<String> list) {
+  static String parseStory(ArrayList<String> list, UserInput ui) {
     ArrayList<String> lines = new ArrayList<String>(list);
     String text = "";
     //Advanced for loop to read a line from the list and parse out the user input lines
@@ -80,8 +83,8 @@ public class Main {
 
           }
           
-          //calls getUserInput and passes the prompt word in
-          text += getUserInput(prompt);
+          //calls ui.getUserInput and passes the prompt word in
+          text += ui.getUserInput(prompt);
           i = n;
         }
         else {
@@ -133,117 +136,5 @@ public class Main {
     }
     //System.out.println("Read complete.\n" + text.get(0));
     return text;
-  }
-
-  static String getUserInput(String wordType) {
-    String word = "";
-    boolean validation = false;
-    //Prompts the user for a number
-    System.out.print(wordType + ": ");
-
-    //Gets user input and assign it to word
-    while (!validation) {
-      try {
-        Scanner input = new Scanner(System.in);
-        word += input.nextLine();
-        validation = true;
-      } catch (Exception e) {
-        System.out.print("Can't accept that. Please enter a/an " + wordType);
-      }
-    }
-
-    //Return user word
-    return word;
-  }
-  static boolean getUserInput(String prompt, boolean isBool) {
-    char letter = ' ';
-    boolean willSave = false;
-    boolean validation = false;
-    //Prompts the user for a number
-    System.out.print(prompt);
-
-    //Gets user input and assign it to word
-    while (!validation) {
-      try {
-        Scanner input = new Scanner(System.in);
-        letter = input.next(".").charAt(0);
-       //System.out.println(letter);
-        if (letter == 'Y' || letter == 'y' || letter == 'N' || letter == 'n') {
-          //System.out.println("Validating...");
-          validation = true;
-        } else {
-          System.out.print("Please enter Y/n: ");
-        }
-      } catch (Exception e) {
-        System.out.print("Please enter Y/n: ");
-      }
-
-      if (letter == 'Y' || letter == 'y')
-        willSave = true;
-    }
-
-    //Return user word
-    return willSave;
-  }
-  static int getUserInput(String prompt, int num) {
-    boolean validation = false;
-    //Prompts the user for a number
-    System.out.print(prompt);
-
-    //Gets user input and assign it to num
-    while (!validation) {
-      try {
-        Scanner input = new Scanner(System.in);
-        num = input.nextInt();
-        validation = true;
-      } catch (Exception e) {
-        System.out.print(prompt);
-      }
-    }
-
-    //Return user number
-    return num;
-  }
-  static int getUserInput(String prompt, int min, int max) {
-    int num = -1;
-    boolean validation = false;
-    //Prompts the user for a number
-    System.out.print(prompt);
-
-    //Gets user input and assign it to num
-    while (!validation) {
-      try {
-        Scanner input = new Scanner(System.in);
-        num = input.nextInt();
-        if (num >= min && num <= max)
-          validation = true;
-        else {
-          System.out.print("Can't accept that. Must be a number between " + min + " and " + max + ": ");
-        }
-      } catch (Exception e) {
-        System.out.print("Can't accept that. Must be a number between " + min + " and " + max + ": ");
-        //e.printStackTrace();
-
-      }
-    }
-
-    /*while (num < min || num > max) {
-      System.out.print("Please enter a number between " + min + " and " + max + ": ");
-      Scanner newInput = new Scanner(System.in);
-      num = newInput.nextInt();
-    }*/
-
-    //Return user number
-    return num;
-  }
-  /*** Stretch Challenge: Read and Write Files ***/
-  static void writeNewFile(String filename) {
-
-  }
-  static void writeToFile(String filename) {
-
-  }
-  static void deleteFile(String filename) {
-
   }
 }
