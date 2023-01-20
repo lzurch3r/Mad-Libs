@@ -39,3 +39,4 @@ It also proved a good exercise in learning to read and write to files.
   The system would use numbers to guide the user toward options.
 - Check for more possible bugs, but allow for more freedom of user input.
 - Implement a way to delete files from a filename typed by the user.
+- Figure out how to close the input stream without bugging the program.
