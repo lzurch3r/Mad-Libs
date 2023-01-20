@@ -1,10 +1,16 @@
 # Overview
 
-{Important! Do not say in this section that this is college assignment. Talk about what you are trying to accomplish as a software engineer to further your learning.}
+This program helped me to learn Java. Because of my familiarity with C++,
+I imagined that Java would prove to be a decent challenge to understand and
+pull through. 
 
-{Provide a description of the software that you wrote to demonstrate the Java language.}
+This is a Mad Libs program that prompts the user to enter a variety of
+different words that combine to tell a story based on a template(s).
+Due to the nature of Mad Libs, each story becomes unique and personalized to
+the user.
 
-{Describe your purpose for writing this software.}
+Learning to do Mad Libs this way taught me more about Java and text manipulation.
+It also proved a good exercise in learning to read and write to files.
 
 {Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
 
@@ -29,8 +35,7 @@
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-
-- Item 1
-- Item 2
-- Item 3
+- Create a more robust user interface that implements a menu system.
+  The system would use numbers to guide the user toward options.
+- Check for more possible bugs, but allow for more freedom of user input.
+- Implement a way to delete files from a filename typed by the user.
