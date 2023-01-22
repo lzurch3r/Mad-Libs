@@ -12,9 +12,7 @@ the user.
 Learning to do Mad Libs this way taught me more about Java and text manipulation.
 It also proved a good exercise in learning to read and write to files.
 
-{Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
-
-[Software Demo Video](http://youtube.link.goes.here)
+[Mad Libs Demo Video](https://youtu.be/U1qxU77ZhM8)
 
 # Development Environment
 
