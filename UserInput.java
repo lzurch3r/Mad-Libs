@@ -93,12 +93,6 @@ public class UserInput {
       }
     }
 
-    /*while (num < min || num > max) {
-      System.out.print("Please enter a number between " + min + " and " + max + ": ");
-      Scanner newInput = new Scanner(System.in);
-      num = newInput.nextInt();
-    }*/
-
     //Return user number
     return num;
   }
